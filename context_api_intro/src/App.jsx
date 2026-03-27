@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Dashboard1 from "./components/Dashboard1/Dashboard1";
 import Dashboard2 from "./components/Dashboard2/Dashboard2";
 import Cart from "./components/Dashboard1/Cart";
+import { MyStore } from "./context/MyContext";
 
 const App = () => {
   const [toggle, setToggle] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [getClickedPrduct, setGetClickedPrduct] = useState(null);
+
+
+
+  let data = useContext(MyStore)
+  console.log(data)
 
 
   console.log("cartItems----->", cartItems)
@@ -40,7 +46,6 @@ const App = () => {
           style={{
             height: "100vh",
             width: "100vw",
-            position: "absolute",
             top: "0",
             backgroundColor: "grey",
             position: "fixed",
@@ -50,6 +55,8 @@ const App = () => {
         </div>
       )}
     </div>
+
+    
   );
 };
 

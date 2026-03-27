@@ -28,8 +28,6 @@ const App = () => {
   useEffect(() => {
   if(coordinates){
     fetchWeatherData()
-
-    
   }
   console.log("runninggg.......")
   }, [coordinates])
@@ -38,7 +36,6 @@ const App = () => {
 
   let handleTemperature = () => {
     getCoordinates(cityName);
-
   };
 
   return (
