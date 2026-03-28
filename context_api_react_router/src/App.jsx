@@ -1,19 +1,25 @@
-
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
+import { Theme } from "./context/ThemeContext";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import { Route, Routes } from "react-router";
 
 const App = () => {
-
-  const [theme, setTheme] = useState("Dark")
-
-  let data = useContext(theme)
+  let { theme, renderPages } = useContext(Theme);
 
   return (
-    <div className={`h-screen ${theme ==='Dark' ? "bg-gray-700" : "bg-white"} flex flex-col gap-6`}>
-      <Navbar setTheme={setTheme} theme={theme} />
+    <div
+      className={`h-screen ${theme === "Dark" ? "bg-gray-700" : "bg-white"} flex flex-col gap-6`}
+    >
+      <Navbar />
       <div className="h-[90%] px-[100px] py-5">
-        <Home />
+       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+       </Routes>
       </div>
     </div>
   );

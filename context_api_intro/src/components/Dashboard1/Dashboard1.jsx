@@ -4,6 +4,7 @@ import ProductList from "./ProductList";
 
 const Dashboard1 = ({setCartItems,setGetClickedPrduct}) => {
   const [allProducts, setAllProducts] = useState([]);
+  console.log("all proo..............",allProducts)
 
   let fetchAllProducts = async () => {
     let res = await axios.get("https://fakestoreapi.com/products");

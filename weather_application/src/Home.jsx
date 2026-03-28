@@ -14,7 +14,7 @@ const Home = () => {
       `https://geocoding-api.open-meteo.com/v1/search?name=${city}`,
     );
     console.log(res.data.results[0]);
-    setCoordinates(res.data.results[0]);
+    setCoordinates(res.data.results[0]); //latitude coordinate longitude coordinate
   };
 
   // This api is dependent on coordinates
