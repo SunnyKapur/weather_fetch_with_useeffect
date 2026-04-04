@@ -10,7 +10,7 @@ import Register from "../components/Register";
 const AppRoutes = () => {
   let gigi = createBrowserRouter([
     {
-      path: "/",
+      path: "/dashboard",
       element: <MainLayout />,
       children: [
         {
@@ -28,7 +28,7 @@ const AppRoutes = () => {
       ],
     },
     {
-      path: "/auth",
+      path: "/",
       element: <AuthLayout />,
       children: [
         {
