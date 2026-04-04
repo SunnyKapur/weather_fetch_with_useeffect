@@ -9,7 +9,7 @@ const Home = () => {
     (async () => {
       try {
         let res = await axios.get("https://dummyjson.com/products");
-        console.log(res.data.products)
+        // console.log(res.data.products)
         setProducts(res.data.products);
       } catch (err) {
         console.log("err in api", err);
