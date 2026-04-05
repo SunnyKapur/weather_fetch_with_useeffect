@@ -1,8 +1,15 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { Auth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
+
+  let { setRegisteredUsers, registeredUsers } = useContext(Auth);
+  
+
   let {
     register,
     handleSubmit,
@@ -12,18 +19,20 @@ const Register = () => {
     mode: "onChange",
   });
 
-  let handleFormSubmit = (data) => {
-    console.log(data);
-  };
+ let handleFormSubmit = (data) => {
+  let newUser = [...registeredUsers, data]
+  setRegisteredUsers(newUser)
+  localStorage.setItem("registerUser", JSON.stringify(newUser))
+  toast.success("User registered successfully")
+  reset()
+ }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign Up
-          </p>
+          <p className="mt-2 text-sm text-gray-600">Sign Up</p>
         </div>
         <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100">
           <form className="space-y-6" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -80,7 +89,7 @@ const Register = () => {
               <div className="relative">
                 <input
                   {...register("password", {
-                    required: "Name is required",
+                    required: "Password is required",
                     minLength: {
                       value: 6,
                       message: "Minimum 6 characters is required",
@@ -141,7 +150,7 @@ const Register = () => {
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
               <a
-              onClick={() => navigate("/")}
+                onClick={() => navigate("/")}
                 className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
               >
                 Login here

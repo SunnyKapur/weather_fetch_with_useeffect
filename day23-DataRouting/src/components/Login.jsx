@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import {useNavigate} from 'react-router'
+import { useNavigate } from "react-router";
+import { Auth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
+  let { registeredUsers, setLoggedInUsers } = useContext(Auth);
 
   let {
     register,
@@ -15,16 +19,31 @@ const Login = () => {
   });
 
   let handleFormSubmit = (data) => {
-    console.log(data);
+    let user = registeredUsers.find(
+      (elem) => elem.email === data.email && elem.password === data.password,
+    );
+
+    if (!user) {
+      toast.error("User not found");
+      reset();
+      return;
+    }
+
+    setLoggedInUsers(user);
+    localStorage.setItem("logIn user", JSON.stringify(user));
+    toast.success("User LoggedIn");
+    reset();
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Sign in to your account</h2>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Sign in to your account
+          </h2>
           <p className="mt-2 text-sm text-gray-600">
-           Welcome back! Please enter
+            Welcome back! Please enter
           </p>
         </div>
         <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100">
@@ -124,7 +143,7 @@ const Login = () => {
               Don't have an account?{" "}
               <a
                 onClick={() => navigate("/register")}
-                className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors "
               >
                 Register here
               </a>
