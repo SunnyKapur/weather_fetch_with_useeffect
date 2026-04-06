@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { NavLink } from "react-router";
-import { Auth } from '../context/AuthContext'
+import {  useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
 
- let {setLoggedInUsers} = useContext(Auth)
+ let {setLoggedInUsers} = useAuth()
 
   return (
     <div className="flex flex-col justify-between border-r border-gray-500 px-4 py-8">

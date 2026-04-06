@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router'
-import { Auth } from '../context/AuthContext'
+import {  useAuth } from '../context/AuthContext'
 import { toast } from 'react-toastify'
 
 const ProtectedDashboard = () => {
   console.log("Protected rendering....")
 
-  let {loggedInUsers} = useContext(Auth)
+  let {loggedInUsers} = useAuth()
 
   if(!loggedInUsers){
     toast.error("Unauthorized user")
