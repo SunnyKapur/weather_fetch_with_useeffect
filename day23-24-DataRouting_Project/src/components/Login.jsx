@@ -30,6 +30,7 @@ const Login = () => {
     }
 
     setLoggedInUsers(user);
+    navigate("/dashboard")
     localStorage.setItem("logIn user", JSON.stringify(user));
     toast.success("User LoggedIn");
     reset();
@@ -48,7 +49,6 @@ const Login = () => {
         </div>
         <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100">
           <form className="space-y-6" onSubmit={handleSubmit(handleFormSubmit)}>
-            {/* Name Input */}
 
             {/* Email Input */}
             <div>

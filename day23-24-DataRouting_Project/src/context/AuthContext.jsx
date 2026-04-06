@@ -4,9 +4,11 @@ export let Auth = createContext();
 
 export let AuthProvider = ({ children }) => {
   const [registeredUsers, setRegisteredUsers] = useState(
-    JSON.parse(localStorage.getItem("registerUser")) || []
+    JSON.parse(localStorage.getItem("registerUser")) || [],
   );
-  const [loggedInUsers, setLoggedInUsers] = useState(null);
+  const [loggedInUsers, setLoggedInUsers] = useState(
+    JSON.parse(localStorage.getItem("logIn user")) || null,
+  );
   return (
     <Auth.Provider
       value={{
