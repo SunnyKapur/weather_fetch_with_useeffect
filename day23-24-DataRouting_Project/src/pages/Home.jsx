@@ -1,17 +1,17 @@
-
-import { useLoaderData } from 'react-router';
-import { getAllProducts } from '../api/productApi';
+import { useLoaderData } from "react-router";
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
-  console.log("home rendering....")
+  console.log("home rendering....");
 
-
-  let products = useLoaderData()
-  console.log("jo home main data aachuke hai", products)
+  let products = useLoaderData();
+  console.log("jo home main data aachuke hai", products);
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="grid grid-cols-4 gap-5 " >
+      {products.map((elem) => {
+        return <ProductCard product={elem} key={elem.id} />;
+      })}
     </div>
   );
 };
