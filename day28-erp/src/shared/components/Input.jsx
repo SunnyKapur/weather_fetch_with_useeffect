@@ -1,5 +1,4 @@
-const Input = ({ label, register, name, rules, ...props }) => {
-  console.log(props);
+const Input = ({error,label, register, name, rules, ...props }) => {
   return (
     <div>
       <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -10,6 +9,7 @@ const Input = ({ label, register, name, rules, ...props }) => {
         {...props}
         {...register(name, rules)}
       />
+      {error && <p className="text-red-600">{error.message}</p>}
     </div>
   );
 };
