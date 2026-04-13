@@ -1,11 +1,16 @@
-import React, { useState } from "react";
 import Input from "../../../shared/components/Input";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Button from "../../../shared/components/Button";
+import { useAuthContext } from "../../../shared/hooks/useContextData";
+import { nanoid } from "nanoid";
+import { storage } from "../../../utils/localStorage";
 
 const RegisterPage = () => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
+
+  let { registeredAdmins, setRegisteredAdmins } = useAuthContext();
+
   let {
     register,
     handleSubmit,
@@ -16,8 +21,11 @@ const RegisterPage = () => {
   });
 
   let handleFormSubmit = (data) => {
-    console.log(data)
-    reset()
+    let arr = [...registeredAdmins, { ...data, id: nanoid() }]
+    setRegisteredAdmins(arr);
+   storage.set("reg admins", data)
+   alert("Admin registered....")
+    reset();
   };
 
   return (
@@ -101,7 +109,10 @@ const RegisterPage = () => {
         <div>
           <p>
             Already have an account ?{" "}
-            <span onClick={() => navigate('/')} className="text-blue-600 cursor-pointer">
+            <span
+              onClick={() => navigate("/")}
+              className="text-blue-600 cursor-pointer"
+            >
               Login Here...
             </span>
           </p>

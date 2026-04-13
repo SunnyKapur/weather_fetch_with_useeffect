@@ -3,8 +3,12 @@ import Input from "../../../shared/components/Input";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Button from "../../../shared/components/Button";
+import { useAuthContext } from "../../../shared/hooks/useContextData";
 
 const LoginPage = () => {
+
+  let {registeredAdmins,setLoggedInAdmin} = useAuthContext()
+
   let navigate = useNavigate()
   let {
     register,
@@ -16,9 +20,18 @@ const LoginPage = () => {
   });
 
   let handleFormSubmit = (data) => {
-    console.log(data)
+    let admin = registeredAdmins.find(elem => elem.email === data.email && elem.password === data.password);
+
+    if(!admin){
+      alert("Login failed");
+      return
+    }
+
+    setLoggedInAdmin(admin);
+    alert("Admin logged in")
     reset()
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 flex items-center justify-center p-4 relative overflow-hidden">
